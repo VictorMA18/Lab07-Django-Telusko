@@ -7,8 +7,8 @@ def home(request):
 
 def add(request):
 
-    valor1 = int(request.GET['num1'])
-    valor2 = int(request.GET['num2'])
+    valor1 = int(request.POST['num1'])
+    valor2 = int(request.POST['num2'])
 
     res = valor1 + valor2
 
