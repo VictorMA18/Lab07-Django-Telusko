@@ -1,0 +1,87 @@
+{% load static%}
+{% static "images" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Destino Turístico</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6c63ff, #8a7dff);
+            margin: 0;
+            padding: 0;
+            color: #333333;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Formulario */
+        form {
+            width: 50%;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-weight: bold;
+            color: #333333;
+        }
+
+        form select {
+            width: 100%;
+            padding: 12px 20px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333333;
+        }
+
+        form button[type="submit"] {
+            width: 100%;
+            background-color: #6c63ff;
+            color: #ffffff;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #5a4eff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Eliminar</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nombreCiudad">Selecciona un destino para eliminar:</label>
+        <select name="nombreCiudad" id="nombreCiudad">
+            {% for destino in destinos %}
+                <option value="{{ destino.nombreCiudad }}">{{ destino.nombreCiudad }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Eliminar</button>
+    </form>
+</body>
+</html>

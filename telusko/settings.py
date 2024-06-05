@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'destinosTuristicos.apps.DestinosturisticosConfig',
     'travello.apps.TravelloConfig',
     'django.contrib.admin',
     'django.contrib.auth',

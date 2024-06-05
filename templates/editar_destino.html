@@ -1,0 +1,117 @@
+{% load static%}
+{% static "images" as baseUrl %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Seleccionar y Editar Destino</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+
+        /* Colores */
+        :root {
+            --primary-color: #003366; /* Azul oscuro */
+            --secondary-color: #666666; /* Gris oscuro */
+            --accent-color: #ff6600; /* Naranja */
+            --background-color: #c5d5e6; /* Celeste claro */
+        }
+
+        /* Estilos generales */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--secondary-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        /* Enlaces de destinos */
+        .destinos-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .destino-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .destino-link:hover {
+            background-color: var(--accent-color);
+        }
+
+        /* Formulario */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        form label {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        form input[type="text"],
+        form textarea,
+        form input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid var(--secondary-color);
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        form button[type="submit"] {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: var(--primary-color);
+        }
+    
+    </style>
+</head>
+<body>
+    <h1>Seleccionar y Editar Destino</h1>
+
+    <h2>Destinos Disponibles</h2>
+    <div class="destinos-list">
+        {% for destino in destinos %}
+            <a class="destino-link" href="{% url 'editar_destino_id' destino.pk %}">{{ destino.nombreCiudad }}</a>
+        {% endfor %}
+    </div>
+
+    {% if form %}
+        <h2>Editar Destino: {{ selected_destino.nombreCiudad }}</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Guardar Cambios</button>
+        </form>
+    {% endif %}
+</body>
+</html>

@@ -1,0 +1,139 @@
+{% load static%}
+{% static "images" as baseUrl %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LISTAR DESTINOS</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #a187ff, #c8b8ff);
+            margin: 0;
+            padding: 0;
+            color: #333333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contenedor {
+            width: 80%;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .destinos {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .destino-item {
+            width: 30%;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .destino-imagen {
+            position: relative;
+        }
+
+        .destino-imagen img {
+            width: 100%;
+            height: auto;
+        }
+
+        .spec_offer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #6c63ff;
+            color: #ffffff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .destino-contenido {
+            padding: 10px;
+        }
+
+        .destino_titulo {
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .destino_descripcion {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .destino_precio {
+            font-weight: bold;
+            color: #6c63ff;
+        }
+        
+        a {
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+            text-decoration: none;
+            color: #7a67f1;
+            transition: all 0.3s ease;
+            padding: 10px 20px;
+            border-radius: 5px;
+            background-color: #f5f5f5;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        a:hover {
+            color: #ffffff;
+            background-color: #7a67f1;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+            
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <h1>Listar</h1>
+        <div class="destinos"> 
+            {% for destino in destinos %}
+            <div class="destino-item">
+                <div class="destino-imagen">
+                    <img src="{{ destino.imagenCiudad.url }}">
+                    {% if destino.ofertaTour %}
+                    <div class="spec_offer text-center">En oferta</div>
+                    {% endif %}
+                </div>
+                <div class="destino-contenido">
+                    <div class="destino_titulo">{{ destino.nombreCiudad }}</div>
+                    <div class="destino_descripcion"><p>{{ destino.descripcionCiudad }}</p></div>
+                    <div class="destino_precio">Precio de: S/{{ destino.precioTour }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <a href="{% url 'crear_destino' %}">Crear nuevo destino</a> 
+</body>
+</html>
